@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
 const prompt = inquirer.createPromptModule();
-
+//Imports
 const { Rectangle, Circle, Square } = require('./lib/shapes.js');
 
 // Function for selecting the shape of the SVG
@@ -61,6 +61,7 @@ function shapeSelection() {
                     .then((r) => {
                         const radius = r.circleRadius;
                         const circ = new Circle(radius);
+                        const circleSvg = circ.svg();
                         console.log(circ);
                     })
             }
@@ -68,6 +69,3 @@ function shapeSelection() {
 }
 
 shapeSelection();
-
-// const container = document.getElementById('#svg');
-// container.innerHTML = rectangleSvg + squareSvg + circleSvg;
