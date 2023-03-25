@@ -1,13 +1,7 @@
 const inquirer = require('inquirer');
 const prompt = inquirer.createPromptModule();
 
-const Rectangle = require('./lib/shapes.js');
-const Circle = require('./lib/shapes.js');
-const Square = require('./lib/shapes.js');
-
-// let rectangle = new Rectangle();
-// let circle = new Circle();
-// let square = new Square();
+const { Rectangle, Circle, Square } = require('./lib/shapes.js');
 
 // Function for selecting the shape of the SVG
 function shapeSelection() {
