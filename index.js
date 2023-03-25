@@ -1,4 +1,5 @@
 const inquirer = require('inquirer');
+const prompt = inquirer.createPromptModule();
 
 const Rectangle = require('./lib/shapes.js');
 const Circle = require('./lib/shapes.js');
@@ -22,8 +23,7 @@ function shapeSelection() {
         .then((shape) => {
             const svgShape = shape.svgShapes;
             if (svgShape === 'Square') {
-                inquirer
-                    .prompt([
+                prompt([
                         {
                             type: 'input',
                             message: 'Enter one side size of the square',
@@ -32,12 +32,12 @@ function shapeSelection() {
                     ])
                     .then((size) => {
                         const sideSize = size.squareSide;
-                        console.log(new Square(sideSize));
+                        const squ = new Square(sideSize);
+                        console.log(squ);
                     })
 
             } else if (svgShape === 'Rectangle') {
-                inquirer
-                    .prompt([
+                prompt([
                         {
                             type: 'input',
                             message: 'Enter a Width',
@@ -50,10 +50,24 @@ function shapeSelection() {
                         }
                     ])
                     .then((recSize) => {
-                        console.log(svgShape);
                         const recWidth = recSize.rectangleWidth;
                         const recHeight = recSize.rectangleHeight;
-                        console.log(new Rectangle(recWidth, recHeight));
+                        const rec = new Rectangle(recWidth, recHeight);
+                        console.log(rec);
+                    })
+
+            } else if (svgShape === 'Circle') {
+                prompt([
+                        {
+                            type: 'input',
+                            message: 'Enter a Radius',
+                            name: 'circleRadius'
+                        }
+                    ])
+                    .then((r) => {
+                        const radius = r.circleRadius;
+                        const circ = new Circle(radius);
+                        console.log(circ);
                     })
             }
         })
