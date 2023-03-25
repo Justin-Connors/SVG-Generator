@@ -2,9 +2,7 @@ const inquirer = require('inquirer');
 const prompt = inquirer.createPromptModule();
 //Imports
 const { Rectangle, Circle, Square } = require('./lib/shapes.js');
-const SVG = require('@svgdotjs/svg.js');
 
-console.log(SVG);
 // Function for selecting the shape of the SVG
 function shapeSelection() {
     inquirer
@@ -14,10 +12,26 @@ function shapeSelection() {
                 message: 'What shape would you like your SVG to be',
                 choices: ['Circle', 'Square', 'Rectangle'],
                 name: 'svgShapes'
+            },
+            {
+                type: 'input',
+                message: 'Enter shape color (keyword or hexadecimal):',
+                name: 'shapeColor'
+            },
+            {
+                type: 'input',
+                message: 'Enter Up to 3 characters',
+                name: 'svgChars'
             }
         ])
         .then((shape) => {
             const svgShape = shape.svgShapes;
+
+            if (shape.svgChars.length > 3) {
+                console.log('You cannot use more than 3 Characters');
+                process.exit();
+            }
+
             if (svgShape === 'Square') {
                 prompt([
                         {
