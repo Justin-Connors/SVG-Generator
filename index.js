@@ -2,7 +2,9 @@ const inquirer = require('inquirer');
 const prompt = inquirer.createPromptModule();
 //Imports
 const { Rectangle, Circle, Square } = require('./lib/shapes.js');
+const SVG = require('@svgdotjs/svg.js');
 
+console.log(SVG);
 // Function for selecting the shape of the SVG
 function shapeSelection() {
     inquirer
@@ -61,7 +63,6 @@ function shapeSelection() {
                     .then((r) => {
                         const radius = r.circleRadius;
                         const circ = new Circle(radius);
-                        const circleSvg = circ.svg();
                         console.log(circ);
                     })
             }
