@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
 
+// Function for selecting the shape of the SVG
 function shapeSelection() {
     inquirer
         .prompt([
