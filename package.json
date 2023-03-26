@@ -3,9 +3,6 @@
     "jest": "^29.5.0"
   },
   "dependencies": {
-    "@svgdotjs/svg.js": "^3.1.2",
-    "fs": "^0.0.1-security",
-    "inquirer": "^8.2.4",
-    "svg.js": "^2.7.1"
+    "inquirer": "^8.2.4"
   }
 }
