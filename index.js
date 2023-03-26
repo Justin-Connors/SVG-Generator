@@ -53,12 +53,12 @@ function shapeSelection() {
                         name: 'squareSide'
                     }
                 ])
-                .then((size) => {
-                    if (size.squareSide > 200 || size.squareSide < 50) {
+                .then((s) => {
+                    const sideSize = s.squareSide;
+                    if (sideSize > 200 || sideSize < 50) {
                         console.log('Size must be between 50 - 200');
-                        process.exit();
+                        // process.exit();
                     } else {
-                        const sideSize = size.squareSide;
                         const squ = new Square(sideSize, color, text, txtCol);
                         // console.log(squ.render());
                         const svgString = squ.render();
@@ -77,6 +77,8 @@ function shapeSelection() {
                                     process.exit();
                                 }
                             });
+                        } else {
+                            saveSvgFile(svgString, 'square');
                         }
                         
                     }
@@ -90,7 +92,7 @@ function shapeSelection() {
                     }
                 ])
                 .then((tSize) => {
-                    if (tSize.triSide > 125 || tSize.triSide < 225) {
+                    if (tSize.triSide < 125 || tSize.triSide > 225) {
                         console.log('Triangle size must be between 125 - 225');
                         process.exit();
                     } else {
@@ -113,6 +115,8 @@ function shapeSelection() {
                                     process.exit();
                                 }
                             });
+                        } else {
+                            saveSvgFile(svgString, 'triangle');
                         }
                     }
                 });
@@ -148,6 +152,8 @@ function shapeSelection() {
                                         process.exit();
                                     }
                                 });
+                            } else {
+                                saveSvgFile(svgString, 'circle');
                             }
                     }
                 });
