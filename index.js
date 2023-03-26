@@ -57,7 +57,7 @@ function shapeSelection() {
                     const sideSize = s.squareSide;
                     if (sideSize > 200 || sideSize < 50) {
                         console.log('Size must be between 50 - 200');
-                        // process.exit();
+                        process.exit();
                     } else {
                         const squ = new Square(sideSize, color, text, txtCol);
                         // console.log(squ.render());
