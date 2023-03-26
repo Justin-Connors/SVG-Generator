@@ -1,7 +1,7 @@
 const inquirer = require('inquirer');
 const prompt = inquirer.createPromptModule();
 //Imports
-const { Rectangle, Circle, Square, AllShapes } = require('./lib/shapes.js');
+const { Triangle, Circle, Square, AllShapes } = require('./lib/shapes.js');
 
 // Function for selecting the shape of the SVG
 function shapeSelection() {
@@ -10,7 +10,7 @@ function shapeSelection() {
             {
                 type: 'list',
                 message: 'What shape would you like your SVG to be',
-                choices: ['Circle', 'Square', 'Rectangle'],
+                choices: ['Circle', 'Square', 'Triangle'],
                 name: 'svgShapes'
             },
             {
@@ -22,12 +22,18 @@ function shapeSelection() {
                 type: 'input',
                 message: 'Enter Up to 3 characters',
                 name: 'svgChars'
+            },
+            {
+                type: 'input',
+                message: 'Enter text color',
+                name: 'txtColor'
             }
         ])
         .then((shape) => {
             const svgShape = shape.svgShapes;
-            const color = shape.shapeColor;
+            const color = shape.shapeColor.toLowerCase();
             const text = shape.svgChars;
+            const txtCol = shape.txtColor.toLowerCase();
 
             if (shape.svgChars.length > 3) {
                 console.log('You cannot use more than 3 Characters');
@@ -38,48 +44,43 @@ function shapeSelection() {
                 prompt([
                         {
                             type: 'input',
-                            message: 'Enter one side size of the square',
+                            message: 'Enter one side size of the square between 50 and 200',
                             name: 'squareSide'
                         }
                     ])
                     .then((size) => {
-                        const sideSize = size.squareSide;
-                        const squ = new Square(sideSize, color, text);
-                        console.log(squ.render());
+                        if(size.squareSide > 200 || size.squareSide < 50) {
+                            console.log('Size must be between 50 - 200');
+                            process.exit();
+                        } else {
+                            const sideSize = size.squareSide;
+                            const squ = new Square(sideSize, color, text, txtCol);
+                            console.log(squ.render());
+                        }
                     })
 
-            } else if (svgShape === 'Rectangle') {
-                prompt([
-                        {
-                            type: 'input',
-                            message: 'Enter a Width',
-                            name: 'rectangleWidth'
-                        },
-                        {
-                            type: 'input',
-                            message: 'Enter a Height',
-                            name: 'rectangleHeight'
-                        }
-                    ])
-                    .then((recSize) => {
-                        const recWidth = recSize.rectangleWidth;
-                        const recHeight = recSize.rectangleHeight;
-                        const rec = new Rectangle(recWidth, recHeight, color, text);
-                        console.log(rec.render());
-                    })
+            } else if (svgShape === 'Triangle') {
+               
+                const tri = new Triangle(color, text, txtCol);
+                console.log(tri.render());
 
             } else if (svgShape === 'Circle') {
                 prompt([
                         {
                             type: 'input',
-                            message: 'Enter a Radius',
+                            message: 'Enter a Radius not greater than 50',
                             name: 'circleRadius'
                         }
                     ])
                     .then((r) => {
-                        const radius = r.circleRadius;
-                        const circ = new Circle(radius, color, text);
-                        console.log(circ.render());
+                        if(r.circleRadius > 50) { 
+                            console.log('Circle radius cannot be greater than 50');
+                            process.exit();
+                        } else {
+                            const radius = r.circleRadius;
+                            const circ = new Circle(radius, color, text, txtCol);
+                            console.log(circ.render());
+                        }
                     })
             }
         })
