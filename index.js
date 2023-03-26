@@ -60,10 +60,23 @@ function shapeSelection() {
                     })
 
             } else if (svgShape === 'Triangle') {
-               
-                const tri = new Triangle(color, text, txtCol);
-                console.log(tri.render());
-
+               prompt([
+                    {
+                        type: 'input',
+                        message: 'Enter the size of the triangle between 125 - 225',
+                        name: 'triSide'
+                    }
+               ])
+               .then((tSize) => {
+                    if(tSize.triSide > 125 || tSize.triSide < 225) {
+                        console.log('Triangle size must be between 125 - 225');
+                        process.exit();
+                    } else {
+                        const triSize = tSize.triSide;
+                        const tri = new Triangle(triSize, color, text, txtCol);
+                        console.log(tri.render());
+                    }
+               })
             } else if (svgShape === 'Circle') {
                 prompt([
                         {
