@@ -57,7 +57,7 @@ function shapeSelection() {
                             const squ = new Square(sideSize, color, text, txtCol);
                             console.log(squ.render());
                         }
-                    })
+                    });
 
             } else if (svgShape === 'Triangle') {
                prompt([
@@ -76,7 +76,7 @@ function shapeSelection() {
                         const tri = new Triangle(triSize, color, text, txtCol);
                         console.log(tri.render());
                     }
-               })
+               });
             } else if (svgShape === 'Circle') {
                 prompt([
                         {
@@ -94,9 +94,9 @@ function shapeSelection() {
                             const circ = new Circle(radius, color, text, txtCol);
                             console.log(circ.render());
                         }
-                    })
+                    });
             }
-        })
+        });
 }
 
 shapeSelection();
