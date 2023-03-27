@@ -6,10 +6,12 @@ const fs = require('fs');
 
 // Function for selecting the shape of the SVG
 function shapeSelection() {
+    //Global const for svg paths used for checking if they exist
     const circlePath = 'circle.svg';
     const trianglePath = 'triangle.svg';
     const squarePath = 'square.svg';
 
+    //Initial prompts for the user
     inquirer
         .prompt([
             {
@@ -35,16 +37,19 @@ function shapeSelection() {
             }
         ])
         .then((shape) => {
+            //Getting all data from the promise and saving them to a const to use
             const svgShape = shape.svgShapes;
             const color = shape.shapeColor.toLowerCase();
             const text = shape.svgChars;
             const txtCol = shape.txtColor.toLowerCase();
 
+            //Checking if user tried to use more than 3 characters in their SVG if so exit execution
             if (shape.svgChars.length > 3) {
                 console.log('You cannot use more than 3 Characters');
                 process.exit();
             }
 
+            //If the shape selected was a Square
             if (svgShape === 'Square') {
                 prompt([
                     {
@@ -55,14 +60,15 @@ function shapeSelection() {
                 ])
                 .then((s) => {
                     const sideSize = s.squareSide;
+                    // Checking if user made square too big or too small
                     if (sideSize > 200 || sideSize < 50) {
                         console.log('Size must be between 50 - 200');
                         process.exit();
-                    } else {
+                    } else { // If shape size are fine, create the square
                         const squ = new Square(sideSize, color, text, txtCol);
                         // console.log(squ.render());
                         const svgString = squ.render();
-                        if (fs.existsSync(squarePath)) {
+                        if (fs.existsSync(squarePath)) { // if the square already exists, make sure user wants to overwrite
                             prompt([
                                 {
                                     type: 'confirm',
@@ -71,19 +77,19 @@ function shapeSelection() {
                                 }
                             ])
                             .then((r) => {
-                                if (r.replaceConfirm === true) {
+                                if (r.replaceConfirm === true) { // executed if user wants to overwrite else exit application
                                     saveSvgFile(svgString, 'square');
                                 } else {
                                     process.exit();
                                 }
                             });
                         } else {
-                            saveSvgFile(svgString, 'square');
+                            saveSvgFile(svgString, 'square'); // if there is no file that already exists we can just save it
                         }
                         
                     }
                 });
-            } else if (svgShape === 'Triangle') {
+            } else if (svgShape === 'Triangle') { // Same logic for Triangle as there was for square, just different user inputs
                 prompt([
                     {
                         type: 'input',
@@ -120,7 +126,7 @@ function shapeSelection() {
                         }
                     }
                 });
-            } else if (svgShape === 'Circle') {
+            } else if (svgShape === 'Circle') { // Same logic for Circle as there was for square, just different user inputs
                 prompt([
                     {
                         type: 'input',
@@ -161,7 +167,7 @@ function shapeSelection() {
         });
 }
 
-
+// Function to save the svg file to the directory with specified shape name
 function saveSvgFile(svgString, fileName) {
     fs.writeFile(`${fileName}.svg`, svgString, (err) => {
         if (err) throw err;
