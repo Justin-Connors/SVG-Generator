@@ -36,9 +36,9 @@ function shapeSelection() {
         ])
         .then((shape) => {
             const svgShape = shape.svgShapes;
-            const color = shape.shapeColor.toLowerCase();
+            const color = shape.shapeColor;
             const text = shape.svgChars;
-            const txtCol = shape.txtColor.toLowerCase();
+            const txtCol = shape.txtColor;
 
             if (shape.svgChars.length > 3) {
                 console.log('You cannot use more than 3 Characters');
