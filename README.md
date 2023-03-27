@@ -12,7 +12,7 @@ Now that you should have the packages/modules required for the application you c
 Now go through the prompts and a *shapename*.svg file will be generated inside the project directory.
 
 ## Tests
-You can run ```jest shapes``` in the terminal to run some tests if you'd like. If you'd like to add or edit any of the tests, go to shapes.test.js to fiddle around!
+You can run ```jest shapes``` in the terminal to run some tests if you'd like. If you'd like to add or edit any of the tests, go to ```lib/shapes.test.js``` to fiddle around!
 
 ## Youtube video
 https://www.youtube.com/watch?v=qqRdoHCCXEY
